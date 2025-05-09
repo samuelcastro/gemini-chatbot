@@ -53,13 +53,9 @@ export const History = ({ user }: { user: User | undefined }) => {
     data: history,
     isLoading,
     mutate,
-  } = useSWR<Array<Chat>>(
-    user ? "https://gemini-chatbot-linkeen.vercel.app/api/history" : null,
-    fetcher,
-    {
-      fallbackData: [],
-    }
-  );
+  } = useSWR<Array<Chat>>(user ? "/api/history" : null, fetcher, {
+    fallbackData: [],
+  });
 
   useEffect(() => {
     mutate();
@@ -69,12 +65,9 @@ export const History = ({ user }: { user: User | undefined }) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   const handleDelete = async () => {
-    const deletePromise = fetch(
-      `https://gemini-chatbot-linkeen.vercel.app/api/chat?id=${deleteId}`,
-      {
-        method: "DELETE",
-      }
-    );
+    const deletePromise = fetch(`/api/chat?id=${deleteId}`, {
+      method: "DELETE",
+    });
 
     toast.promise(deletePromise, {
       loading: "Deleting chat...",
