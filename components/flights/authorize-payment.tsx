@@ -16,8 +16,8 @@ export function AuthorizePayment({
   intent?: { reservationId: string };
 }) {
   const { data: reservation, mutate } = useSWR(
-    `/api/reservation?id=${intent.reservationId}`,
-    fetcher,
+    `https://gemini-chatbot-hzdakoug9-linkeen.vercel.app/api/reservation?id=${intent.reservationId}`,
+    fetcher
   );
 
   const [input, setInput] = useState("");
@@ -25,14 +25,14 @@ export function AuthorizePayment({
   const handleAuthorize = async (magicWord: string) => {
     try {
       const response = await fetch(
-        `/api/reservation?id=${intent.reservationId}`,
+        `https://gemini-chatbot-hzdakoug9-linkeen.vercel.app/api/reservation?id=${intent.reservationId}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ magicWord }),
-        },
+        }
       );
 
       if (!response.ok) {

@@ -53,9 +53,15 @@ export const History = ({ user }: { user: User | undefined }) => {
     data: history,
     isLoading,
     mutate,
-  } = useSWR<Array<Chat>>(user ? "/api/history" : null, fetcher, {
-    fallbackData: [],
-  });
+  } = useSWR<Array<Chat>>(
+    user
+      ? "https://gemini-chatbot-hzdakoug9-linkeen.vercel.app/api/history"
+      : null,
+    fetcher,
+    {
+      fallbackData: [],
+    }
+  );
 
   useEffect(() => {
     mutate();
@@ -65,9 +71,12 @@ export const History = ({ user }: { user: User | undefined }) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   const handleDelete = async () => {
-    const deletePromise = fetch(`/api/chat?id=${deleteId}`, {
-      method: "DELETE",
-    });
+    const deletePromise = fetch(
+      `https://gemini-chatbot-hzdakoug9-linkeen.vercel.app/api/chat?id=${deleteId}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     toast.promise(deletePromise, {
       loading: "Deleting chat...",
@@ -169,13 +178,13 @@ export const History = ({ user }: { user: User | undefined }) => {
                     key={chat.id}
                     className={cx(
                       "flex flex-row items-center gap-6 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-md pr-2",
-                      { "bg-zinc-200 dark:bg-zinc-700": chat.id === id },
+                      { "bg-zinc-200 dark:bg-zinc-700": chat.id === id }
                     )}
                   >
                     <Button
                       variant="ghost"
                       className={cx(
-                        "hover:bg-zinc-200 dark:hover:bg-zinc-700 justify-between p-0 text-sm font-normal flex flex-row items-center gap-2 pr-2 w-full transition-none",
+                        "hover:bg-zinc-200 dark:hover:bg-zinc-700 justify-between p-0 text-sm font-normal flex flex-row items-center gap-2 pr-2 w-full transition-none"
                       )}
                       asChild
                     >
