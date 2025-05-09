@@ -54,9 +54,7 @@ export const History = ({ user }: { user: User | undefined }) => {
     isLoading,
     mutate,
   } = useSWR<Array<Chat>>(
-    user
-      ? "https://gemini-chatbot-hzdakoug9-linkeen.vercel.app/api/history"
-      : null,
+    user ? "https://gemini-chatbot-linkeen.vercel.app/api/history" : null,
     fetcher,
     {
       fallbackData: [],
@@ -72,7 +70,7 @@ export const History = ({ user }: { user: User | undefined }) => {
 
   const handleDelete = async () => {
     const deletePromise = fetch(
-      `https://gemini-chatbot-hzdakoug9-linkeen.vercel.app/api/chat?id=${deleteId}`,
+      `https://gemini-chatbot-linkeen.vercel.app/api/chat?id=${deleteId}`,
       {
         method: "DELETE",
       }

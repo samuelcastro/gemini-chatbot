@@ -105,7 +105,7 @@ export function MultimodalInput({
 
     try {
       const response = await fetch(
-        `https://gemini-chatbot-hzdakoug9-linkeen.vercel.app/api/files/upload`,
+        `https://gemini-chatbot-linkeen.vercel.app/api/files/upload`,
         {
           method: "POST",
           body: formData,
