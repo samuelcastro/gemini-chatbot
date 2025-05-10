@@ -21,6 +21,7 @@ export function Chat({
     useChat({
       id,
       body: { id },
+      api: "https://gemini-chatbot-linkeen.vercel.app/api/chat",
       initialMessages,
       maxSteps: 10,
       onFinish: () => {

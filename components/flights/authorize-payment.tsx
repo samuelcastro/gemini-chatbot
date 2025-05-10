@@ -16,7 +16,7 @@ export function AuthorizePayment({
   intent?: { reservationId: string };
 }) {
   const { data: reservation, mutate } = useSWR(
-    `/api/reservation?id=${intent.reservationId}`,
+    `https://gemini-chatbot-linkeen.vercel.app/api/reservation?id=${intent.reservationId}`,
     fetcher
   );
 
@@ -25,7 +25,7 @@ export function AuthorizePayment({
   const handleAuthorize = async (magicWord: string) => {
     try {
       const response = await fetch(
-        `/api/reservation?id=${intent.reservationId}`,
+        `https://gemini-chatbot-linkeen.vercel.app/api/reservation?id=${intent.reservationId}`,
         {
           method: "PATCH",
           headers: {
