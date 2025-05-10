@@ -22,14 +22,14 @@ export async function POST(request: Request) {
   const { id, messages }: { id: string; messages: Array<Message> } =
     await request.json();
 
-  const session = await auth();
+  // const session = await auth();
 
-  if (!session) {
-    return new Response("Unauthorized", { status: 401 });
-  }
+  // if (!session) {
+  //   return new Response("Unauthorized", { status: 401 });
+  // }
 
   const coreMessages = convertToCoreMessages(messages).filter(
-    (message) => message.content.length > 0,
+    (message) => message.content.length > 0
   );
 
   const result = await streamText({
@@ -63,7 +63,7 @@ export async function POST(request: Request) {
         }),
         execute: async ({ latitude, longitude }) => {
           const response = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto`,
+            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto`
           );
 
           const weatherData = await response.json();
@@ -214,19 +214,19 @@ export async function POST(request: Request) {
         },
       },
     },
-    onFinish: async ({ responseMessages }) => {
-      if (session.user && session.user.id) {
-        try {
-          await saveChat({
-            id,
-            messages: [...coreMessages, ...responseMessages],
-            userId: session.user.id,
-          });
-        } catch (error) {
-          console.error("Failed to save chat");
-        }
-      }
-    },
+    // onFinish: async ({ responseMessages }) => {
+    //   if (session.user && session.user.id) {
+    //     try {
+    //       await saveChat({
+    //         id,
+    //         messages: [...coreMessages, ...responseMessages],
+    //         userId: session.user.id,
+    //       });
+    //     } catch (error) {
+    //       console.error("Failed to save chat");
+    //     }
+    //   }
+    // },
     experimental_telemetry: {
       isEnabled: true,
       functionId: "stream-text",
