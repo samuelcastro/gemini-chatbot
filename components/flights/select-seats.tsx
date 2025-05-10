@@ -62,6 +62,7 @@ export function SelectSeats({
   availability?: typeof SAMPLE;
 }) {
   const { append } = useChat({
+    api: "https://gemini-chatbot-linkeen.vercel.app/api/chat",
     id: chatId,
     body: { id: chatId },
     maxSteps: 5,
@@ -105,7 +106,7 @@ export function SelectSeats({
                     {
                       "bg-blue-500 hover:bg-pink-500": seat.isAvailable,
                       "bg-gray-500 cursor-not-allowed": !seat.isAvailable,
-                    },
+                    }
                   )}
                 >
                   <div className="text-xs text-white">${seat.priceInUSD}</div>
@@ -115,7 +116,7 @@ export function SelectSeats({
                       {
                         "bg-blue-600 group-hover:bg-pink-600": seat.isAvailable,
                         "bg-zinc-600 cursor-not-allowed": !seat.isAvailable,
-                      },
+                      }
                     )}
                   />
                 </div>

@@ -82,6 +82,7 @@ export function ListFlights({
 }) {
   const { append } = useChat({
     id: chatId,
+    api: "https://gemini-chatbot-linkeen.vercel.app/api/chat",
     body: { id: chatId },
     maxSteps: 5,
   });
@@ -122,7 +123,7 @@ export function ListFlights({
               <div className="text-base sm:text-base">
                 {differenceInHours(
                   new Date(flight.arrival.timestamp),
-                  new Date(flight.departure.timestamp),
+                  new Date(flight.departure.timestamp)
                 )}{" "}
                 hr
               </div>
